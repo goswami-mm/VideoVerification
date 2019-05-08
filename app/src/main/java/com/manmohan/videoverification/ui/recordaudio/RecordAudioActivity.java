@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.manmohan.videoverification.R;
 
-public class RecordAudio extends AppCompatActivity {
+public class RecordAudioActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
