@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.manmohan.videoverification.R;
+import com.manmohan.videoverification.ui.captureimage.CaptureImageActivity;
 import com.manmohan.videoverification.ui.recordvideo.RecordVideoActivity;
 
 import java.util.ArrayList;
@@ -28,22 +30,22 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSIONS_REQUEST = 1;
     private static final int RECORD_VIDEO_CODE = 1002;
+    private static final int CROP_IMAGE_CODE = 1007;
 
 
     private static final String PERMISSION_CAMERA = Manifest.permission.CAMERA;
     private static final String PERMISSION_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private static final String PERMISSION_AUDIO = Manifest.permission.RECORD_AUDIO;
-    private AppCompatButton takePicBt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        takePicBt = findViewById(R.id.record_video_bt);
-        takePicBt.setOnClickListener(v -> {
-                openRecordVideoScreen();
-                });
+        findViewById(R.id.record_video_bt).setOnClickListener(v ->
+                openRecordVideoScreen());
+        findViewById(R.id.take_pic_bt).setOnClickListener(v ->
+                openCaptureImageScreen());
 
         if (!hasPermission()) {
             requestPermission();
@@ -88,7 +90,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void openRecordVideoScreen() {
         startActivityForResult(new Intent(this, RecordVideoActivity.class), RECORD_VIDEO_CODE);
-        Log.e("mainActivity", "start video activity");
+    }
+
+
+    private void openCaptureImageScreen() {
+        startActivityForResult(new Intent(this, CaptureImageActivity.class), CROP_IMAGE_CODE);
     }
 
     @Override
@@ -97,6 +103,13 @@ public class MainActivity extends AppCompatActivity {
             ArrayList<String> bitmapURIs = data.getStringArrayListExtra("snapshots");
             if(bitmapURIs!=null) {
                 Log.e("MainActivity", "get Uris of size : " + bitmapURIs.size());
+            } else {
+                Toast.makeText(this, "Error occured", Toast.LENGTH_LONG).show();
+            }
+        }else if (resultCode == RESULT_OK && requestCode == CROP_IMAGE_CODE) {
+            Uri imageUri = data.getData();
+            if(imageUri!=null) {
+                Log.e("MainActivity", "File at : " + imageUri.toString());
             } else {
                 Toast.makeText(this, "Error occured", Toast.LENGTH_LONG).show();
             }

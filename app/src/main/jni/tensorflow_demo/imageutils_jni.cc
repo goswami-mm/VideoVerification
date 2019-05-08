@@ -24,7 +24,7 @@ limitations under the License.
 #include "yuv2rgb.h"
 
 #define IMAGEUTILS_METHOD(METHOD_NAME) \
-  Java_com_manmohan_pocai_aiengine_env_ImageUtils_##METHOD_NAME  // NOLINT
+  Java_com_manmohan_videoverification_aiengine_env_ImageUtils_##METHOD_NAME  // NOLINT
 
 #ifdef __cplusplus
 extern "C" {

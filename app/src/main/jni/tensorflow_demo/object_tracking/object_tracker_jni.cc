@@ -31,7 +31,7 @@ limitations under the License.
 namespace tf_tracking {
 
 #define OBJECT_TRACKER_METHOD(METHOD_NAME) \
-  Java_com_manmohan_pocai_aiengine_env_tracking_ObjectTracker_##METHOD_NAME  // NOLINT
+  Java_com_manmohan_videoverification_aiengine_env_tracking_ObjectTracker_##METHOD_NAME  // NOLINT
 
 JniLongField object_tracker_field("nativeObjectTracker");
 

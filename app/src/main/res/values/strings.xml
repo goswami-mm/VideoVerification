@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Video Verification</string>
     <string name="record_video">Record Video</string>
+    <string name="record_audio">Record Audio</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="verify_video">Verify Video</string>
+
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="enter_name">Enter name</string>
+    <string name="select_name">Select name</string>
+    <string name="ok">OK</string>
 </resources>
