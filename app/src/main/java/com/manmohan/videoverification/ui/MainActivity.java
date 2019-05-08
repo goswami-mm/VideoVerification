@@ -19,6 +19,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.manmohan.videoverification.R;
 import com.manmohan.videoverification.ui.captureimage.CaptureImageActivity;
+import com.manmohan.videoverification.ui.recordaudio.RecordAudioActivity;
 import com.manmohan.videoverification.ui.recordvideo.RecordVideoActivity;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST = 1;
     private static final int RECORD_VIDEO_CODE = 1002;
     private static final int CROP_IMAGE_CODE = 1007;
-
+    private static final int RECORD_AUDIO_CODE = 1009;
 
     private static final String PERMISSION_CAMERA = Manifest.permission.CAMERA;
     private static final String PERMISSION_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 openRecordVideoScreen());
         findViewById(R.id.take_pic_bt).setOnClickListener(v ->
                 openCaptureImageScreen());
+        findViewById(R.id.record_audio_bt).setOnClickListener(v ->
+                openRecordAudioScreen());
 
         if (!hasPermission()) {
             requestPermission();
@@ -97,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(new Intent(this, CaptureImageActivity.class), CROP_IMAGE_CODE);
     }
 
+    private void openRecordAudioScreen() {
+        startActivityForResult(new Intent(this, RecordAudioActivity.class), RECORD_AUDIO_CODE);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK && requestCode == RECORD_VIDEO_CODE) {
@@ -106,10 +113,17 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Error occured", Toast.LENGTH_LONG).show();
             }
-        }else if (resultCode == RESULT_OK && requestCode == CROP_IMAGE_CODE) {
+        } else if (resultCode == RESULT_OK && requestCode == CROP_IMAGE_CODE) {
             Uri imageUri = data.getData();
             if(imageUri!=null) {
                 Log.e("MainActivity", "File at : " + imageUri.toString());
+            } else {
+                Toast.makeText(this, "Error occured", Toast.LENGTH_LONG).show();
+            }
+        } else if (resultCode == RESULT_OK && requestCode == RECORD_AUDIO_CODE) {
+            String audioFile = data.getStringExtra("audioPath");
+            if(audioFile!=null) {
+                Log.e("MainActivity", "Audio File at : " + audioFile);
             } else {
                 Toast.makeText(this, "Error occured", Toast.LENGTH_LONG).show();
             }
