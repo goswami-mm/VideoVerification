@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.recordvideo.RecordVideo"></activity>
+        <activity android:name=".ui.recordaudio.RecordAudio" />
+        <activity android:name=".ui.captureimage.CaptureImageActivity" />
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
