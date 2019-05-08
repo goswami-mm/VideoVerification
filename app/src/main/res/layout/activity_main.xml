@@ -34,8 +34,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/record_audio_bt"
-        android:text="@string/record_audio"
+        android:id="@+id/verify_bt"
+        android:text="@string/verify_video"
         android:padding="10dp"
         android:layout_margin="10dp"/>
 
